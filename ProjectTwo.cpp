@@ -5,14 +5,12 @@
 #include <vector>
 #include <algorithm>
 
-
 using namespace std;
-
 
 //Course Class Declartion.
 class Course {
 
-    //private variable for course
+//private variable for course
 private:
     string courseId;
     string courseName;
@@ -25,9 +23,7 @@ public:
 //Course constructor
     Course(string courseId, string courseName, string coursePrerequiste1, string coursePrerequiste2)
         : courseId(courseId), courseName(courseName), coursePrerequiste1(coursePrerequiste1), coursePrerequiste2(coursePrerequiste2) {
- 
-
-    }
+     }
 
     //Getter functions
     string getCourseId() const  {
@@ -55,9 +51,7 @@ public:
 
 //Hash table declartion 
 class HashTable {
-
 private:
-
     //variables for Hash table
     static const int TABLE_SIZE = 101;
     vector<Course> table[TABLE_SIZE];
@@ -71,15 +65,10 @@ public:
         int index = hashFunction(course.getCourseId());
         table[index].push_back(course);
     }
-
-
-
     //Display info for testing
     void displayInfo() const {
         for (int i = 0; i < TABLE_SIZE; ++i) {
-            if (!table[i].empty()) {
-
-               
+            if (!table[i].empty()) {               
                 for (const auto& course : table[i]) {
                     cout << "CourseId: " << course.getCourseId() << endl;
                     cout << "Course Name: " << course.getCourseName() << endl;
@@ -100,12 +89,10 @@ public:
             allCourses.insert(allCourses.end(), table[i].begin(), table[i].end());
         }
 
-
         std::sort(allCourses.begin(), allCourses.end(),
             [](const Course& a, const Course& b) {
                 return a.getCourseId() < b.getCourseId();
             });
-
 
         for (const auto& course : allCourses) {
             cout << "CourseId: " << course.getCourseId() << endl;
@@ -138,12 +125,10 @@ public:
         while (getline(file, line)) {
             stringstream ss(line);
             string courseId, courseName, coursePrerequiste1, coursePrerequiste2;
-
             getline(ss, courseId, ',');
             getline(ss, courseName, ',');
             getline(ss, coursePrerequiste1, ',');
             getline(ss, coursePrerequiste2, ',');
-
             Course course(courseId, courseName, coursePrerequiste1, coursePrerequiste2);
             insert(course);
         }
@@ -160,15 +145,11 @@ int main()
     HashTable hashTable;
     int userSelection = 0;
     string searchId;
-     Course* foundCourse = hashTable.findCourse(searchId);
-   
-   
+     Course* foundCourse = hashTable.findCourse(searchId); 
     cout << "Welcome to the course planner." << endl;
       
     //Menu Loop                
         while (userSelection != 9) {
-
-
             cout << "\n1. Load Data Structure." << endl;
             cout << "2. Print Course List." << endl;
             cout << "3. Print Course." << endl;
@@ -177,15 +158,12 @@ int main()
             cin >> userSelection;
                 
         switch (userSelection) {
-
         case 1:
             hashTable.loadCSV("C:/Users/dklei/Downloads/CS 300 ABCU_Advising_Program_Input.csv");
             break;
-
         case 2:
             hashTable.printCoursesAlphabetical();
             break;
-
         case 3: 
             cout << "Enter CourseId: ";
             cin >> searchId;
@@ -193,13 +171,11 @@ int main()
             Course* foundCourse = hashTable.findCourse(searchId);
             if (foundCourse) {
                 foundCourse->printInfo();
-            }
-            else {
+            }else{
                 cout << "Course not found." << endl;
             }
         }
             break;
-
         case 9:
             cout << "Goodbye" << endl;
             break;
@@ -210,9 +186,8 @@ int main()
         }
 
     }
-
-
     return 0;
     
 }
+
 
